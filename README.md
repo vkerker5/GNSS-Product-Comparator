@@ -1,10 +1,8 @@
-# GNSS-Product-Comparator
+# GNSS-Product-Comparator (GNSSPC)
 
 [![Python Version](https://img.shields.io/badge/Python-3.9%2B-blue.svg)](https://www.python.org/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey.svg)]()
 
-**GNSS-Product-Comparator** is a high-performance Python desktop application for comparing, evaluating, and visualizing Global Navigation Satellite System (GNSS) satellite orbit and clock products. It supports GPS, Galileo, BeiDou, GLONASS, and QZSS constellations across precise and broadcast formats.
+**GNSS-Product-Comparator (GNSSPC)** is a Python desktop application for comparing, evaluating, and visualizing Global Navigation Satellite System (GNSS) satellite orbit and clock products. It supports GPS, Galileo, BeiDou, GLONASS, and QZSS constellations across precise and broadcast formats.
 
 ---
 
@@ -20,8 +18,8 @@
    * Calculates per-epoch constellation reference offsets and relative clock drift.
 
 3. **SISRE (Signal-in-Space Range Error) Calculation**:
-   * Evaluates combined orbit and clock error metrics using constellation-specific weight factors (e.g., GPS vs Galileo weights).
-   * Supports mixed-product workflows: **SP3+CLK**, **RINEX NAV + SSR (Galileo HAS / E6-B)**, and **BRDC/NAV pairs**.
+   * Evaluates combined orbit and clock error metrics using constellation-specific weight factors.
+   * Supports mixed-product workflows: **SP3+CLK**, **RINEX NAV + SSR (Galileo HAS / CNES / IGS-RTS)**, and **BRDC/NAV pairs**.
    * Applies Phase Center Offset (PCO) satellite antenna corrections from ANTEX (`.atx`) files.
 
 4. **Elevation Masking & Receiver Topocentric Filtering**:
@@ -46,11 +44,11 @@
 
 | Format | Extension | Description |
 | :--- | :--- | :--- |
-| **SP3 Precise Orbit** | `.sp3`, `.eph` | Precise satellite ephemerides (SP3-a, SP3-c, SP3-d) |
-| **RINEX Clock** | `.clk`, `.clk_30s` | Precise satellite clock bias files |
-| **RINEX Navigation** | `.rnx`, `.nav`, `.*n`, `.*p` | Broadcast navigation ephemerides (RINEX 2.x, 3.x, 4.x) |
+| **SP3 Precise Orbit** | `.sp3` | Precise satellite ephemerides (SP3-a, SP3-c, SP3-d) |
+| **RINEX Clock** | `.clk` | Precise satellite clock bias files |
+| **RINEX Navigation** | `.rnx`, `.nav`, `.*n`| Broadcast navigation ephemerides (RINEX 2.x, 3.x, 4.x) |
 | **ANTEX Antenna** | `.atx` | IGS ANTEX antenna phase center offset and variation models |
-| **Galileo HAS / SSR** | `.has`, `.dat`, `.e6b` | High Accuracy Service (HAS) SSR orbit and clock corrections |
+| **SSR Stream Corrections** | `ssr` | SSR orbit and clock corrections |
 
 ---
 
@@ -101,18 +99,16 @@ python main_app.py
 GNSS-Product-Comparator/
 │
 ├── main_app.py                 # CustomTkinter GUI interface & plotting canvas controller
-├── pyproject.toml              # Modern Python packaging configuration & build metadata
+├── pyproject.toml              # Python packaging configuration & build metadata
 ├── requirements.txt            # Python dependencies (cross-platform)
-├── requirements_linux.txt      # Linux environment dependencies
-├── main_app.spec               # PyInstaller executable build specification
 │
 ├── scripts/                    # Core calculation engines & file parsing routines
 │   ├── __init__.py             # Scripts package initializer
-│   ├── file_parsers.py         # Parsers for SP3, CLK, RINEX NAV, ATX (PCV/PCO), Galileo HAS/SSR
+│   ├── file_parsers.py         # Parsers for SP3, CLK, SSR, RINEX NAV, ATX (PCV/PCO)
 │   ├── comparison_logic.py     # RAC decomposition, SISRE, clock bias, elevation masking, interpolation
 │   ├── covariance_sim.py       # Covariance positioning simulation engine
 │   ├── export_logic.py         # Multi-sheet Excel result export and aggregation
-│   └── orchestrator.py         # End-to-end analysis workflow orchestration
+│   └── orchestrator.py         # End-to-end analysis workflow
 │
 ├── cssrlib/                    # Low-level GNSS algorithms and ephemeris library
 │   ├── __init__.py             # cssrlib package initializer
@@ -122,31 +118,4 @@ GNSS-Product-Comparator/
 │   ├── peph.py                 # Precise ephemeris & ATX antenna parser functions
 │   └── rinex.py                # RINEX navigation & observation file decoders
 │
-└── tests/                      # Headless automated unit test suite
-    ├── __init__.py             # Tests package initializer
-    ├── test_elevation_perf.py  # Topocentric elevation masking and vectorization tests
-    ├── test_file_date_extraction.py # Product filename date extraction tests
-    ├── test_interpolation.py   # Barycentric interpolation accuracy tests
-    └── test_sat_filter.py      # Satellite discovery and pattern filter tests
 ```
-
----
-
-## Running Tests
-
-To run the full automated test suite headlessly:
-
-```bash
-python -m unittest discover tests
-```
-
-Or using `pytest`:
-```bash
-pytest tests/
-```
-
----
-
-## License
-
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
