@@ -1,0 +1,63 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gnss-product-comparator"
+version = "1.0.0"
+description = "A specialized desktop application for comparing, evaluating, and visualizing GNSS satellite orbit and clock products."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+    { name = "Vladyslav Kerker" }
+]
+keywords = [
+    "gnss",
+    "gps",
+    "galileo",
+    "glonass",
+    "beidou",
+    "sp3",
+    "clk",
+    "sisre",
+    "rinex",
+    "orbit-determination",
+    "satellite-navigation"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: GIS",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "numpy>=1.26.0",
+    "scipy>=1.12.0",
+    "pandas>=2.1.0",
+    "bitstruct>=8.18.0",
+    "openpyxl>=3.1.0",
+    "customtkinter>=5.2.0",
+    "matplotlib>=3.8.0",
+    "pillow>=10.0.0",
+    "darkdetect>=0.8.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pyinstaller>=6.0.0",
+    "pytest>=7.0.0",
+]
+
+[project.gui-scripts]
+gnss-comparator = "main_app:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
