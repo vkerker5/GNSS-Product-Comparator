@@ -1,7 +1,8 @@
 *
+!.gitignore
 !cssrlib
 !scripts
 !README.md
-!main.app.py
+!main_app.py
 !pyproject.toml
 !requirements.txt
