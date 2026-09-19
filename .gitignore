@@ -4,5 +4,7 @@
 !scripts
 !README.md
 !main_app.py
+!main_app.spec
 !pyproject.toml
 !requirements.txt
+AGENT_INSTRUCTIONS.md
