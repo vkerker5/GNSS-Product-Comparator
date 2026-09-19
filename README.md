@@ -68,6 +68,8 @@ cd GNSS-Product-Comparator
 * **Windows (PowerShell):**
   ```powershell
   python -m venv .venv
+  # If script execution is disabled on your system, enable it first:
+  Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
   .venv\Scripts\Activate.ps1
   ```
 * **Linux / macOS:**
@@ -90,6 +92,16 @@ Launch the CustomTkinter GUI:
 python main_app.py
 ```
 *(Or install in editable mode: `pip install -e .` and run `gnss-comparator`)*.
+
+---
+
+## Building Standalone Executable
+
+To package the application into a standalone desktop executable using PyInstaller:
+```bash
+pyinstaller --clean main_app.spec
+```
+The generated executable will be placed in `dist/main_app/main_app.exe`.
 
 ---
 
